@@ -21,9 +21,6 @@ vim.opt.showmode = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:longest"
 
-vim.opt.foldmethod = "expr"
-vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
-
 lvim.plugins = {
     { "wakatime/vim-wakatime" },
     {
@@ -147,7 +144,12 @@ lvim.plugins = {
             require('symbols-outline').setup()
         end
     },
+    {
+        "EdenEast/nightfox.nvim"
+    }
 }
 
 lvim.builtin.treesitter.rainbow.enable = true
+
+lvim.colorscheme = "carbonfox"
 
