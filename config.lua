@@ -7,7 +7,7 @@
 vim.opt.cmdheight = 1
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
-vim.opt.relativenumber = true
+vim.opt.relativenumber = false
 vim.opt.wrap = false
 vim.opt.number = true
 vim.opt.hlsearch = true
@@ -20,6 +20,11 @@ vim.opt.showcmd = true
 vim.opt.showmode = true
 vim.opt.wildmenu = true
 vim.opt.wildmode = "list:longest"
+vim.opt.shell = "zsh"
+
+lvim.keys.normal_mode["<Space>bx"] = ":bd<CR>"
+lvim.keys.normal_mode["<Space>nb"] = ":bn<CR>"
+lvim.keys.normal_mode["<Space>b!"] = ":bd!<CR>"
 
 lvim.plugins = {
     { "wakatime/vim-wakatime" },
@@ -146,6 +151,14 @@ lvim.plugins = {
     },
     {
         "EdenEast/nightfox.nvim"
+    },
+    {
+        "andweeb/presence.nvim",
+        config = function()
+            require('presence').setup({
+                enable_line_number = true
+            })
+        end
     }
 }
 
