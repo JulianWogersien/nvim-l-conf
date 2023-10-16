@@ -170,5 +170,3 @@ lvim.plugins = {
 lvim.builtin.treesitter.rainbow.enable = true
 
 lvim.colorscheme = "carbonfox"
-
->>>>>>> f43021ce5c0d148e3f5a79ca8a12c4cef5cdfc58
