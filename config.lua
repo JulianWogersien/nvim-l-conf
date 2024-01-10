@@ -25,8 +25,41 @@ lvim.keys.normal_mode["<Space>bx"] = ":bd<CR>"
 lvim.keys.normal_mode["<Space>nb"] = ":bn<CR>"
 lvim.keys.normal_mode["<Space>b!"] = ":bd!<CR>"
 
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
+
 lvim.plugins = {
     { "wakatime/vim-wakatime" },
+    { "mfussenegger/nvim-dap" },
+    {
+        "mrcjkb/rustaceanvim",
+        version = "^3",
+        dependencies = {
+            "nvim-lua/plenary.nvim",
+            "mfussenegger/nvim-dap",
+            {
+                "lvimuser/lsp-inlayhints.nvim",
+                opts = {}
+            },
+        },
+        ft = { "rust" },
+        config = function()
+            vim.g.rustaceanvim = {
+                inlay_hints = {
+                    highlight = "NonText",
+                },
+                tools = {
+                    hover_actions = {
+                        auto_focus = true,
+                    },
+                },
+                server = {
+                    on_attach = function(client, bufnr)
+                        require("lsp-inlayhints").on_attach(client, bufnr)
+                    end
+                }
+            }
+        end
+    },
     {
         "wfxr/minimap.vim",
         build = "cargo install --locked code-minimap",
@@ -159,6 +192,15 @@ lvim.plugins = {
             })
         end
     }
+}
+
+--LINTER/FORMATTER/LSP
+local linters = require "lvim.lsp.null-ls.linters"
+linters.setup {
+    {
+        name = "shellcheck",
+        args = { "--severity", "warning" },
+    },
 }
 
 lvim.builtin.treesitter.rainbow.enable = true
