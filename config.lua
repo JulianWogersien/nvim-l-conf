@@ -32,14 +32,10 @@ lvim.plugins = {
     { "mfussenegger/nvim-dap" },
     {
         "mrcjkb/rustaceanvim",
-        version = "^3",
+        version = "^4",
         dependencies = {
             "nvim-lua/plenary.nvim",
             "mfussenegger/nvim-dap",
-            {
-                "lvimuser/lsp-inlayhints.nvim",
-                opts = {}
-            },
         },
         ft = { "rust" },
         config = function()
@@ -53,22 +49,10 @@ lvim.plugins = {
                     },
                 },
                 server = {
-                    on_attach = function(client, bufnr)
-                        require("lsp-inlayhints").on_attach(client, bufnr)
-                    end
+                    on_attach = require("lvim.lsp").common_on_attach
                 }
             }
         end
-    },
-    {
-        "wfxr/minimap.vim",
-        build = "cargo install --locked code-minimap",
-        -- cmd = {"Minimap, "MinimapClose", "MinimapToggle", "MinimapRefresh", "MinimapUpdateHightlight"},
-        config = function ()
-            vim.cmd ("let g:minimap_width = 10")
-            vim.cmd ("let g:minimap_auto_start = 1")
-            vim.cmd ("let g:minimap_auto_start_win_enter = 1")
-        end,
     },
     {
         "kevinhwang91/nvim-bqf",
