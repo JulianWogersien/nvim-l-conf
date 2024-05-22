@@ -190,3 +190,15 @@ linters.setup {
 lvim.builtin.treesitter.rainbow.enable = true
 
 lvim.colorscheme = "carbonfox"
+local version = vim.version()
+if version.minor >= 10 or version.major >= 1 then
+    vim.api.nvim_create_autocmd("LspAttach", {
+    group = vim.api.nvim_create_augroup("UserLspConfig", {}),
+    callback = function(args)
+        local client = vim.lsp.get_client_by_id(args.data.client_id)
+        if client.server_capabilities.inlayHintProvider then
+            vim.lsp.inlay_hint.enable(args.buf, true)
+        end
+    end
+})
+end
