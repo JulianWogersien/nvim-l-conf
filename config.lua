@@ -25,8 +25,6 @@ lvim.keys.normal_mode["<Space>bx"] = ":bd<CR>"
 lvim.keys.normal_mode["<Space>nb"] = ":bn<CR>"
 lvim.keys.normal_mode["<Space>b!"] = ":bd!<CR>"
 
-vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
-
 lvim.plugins = {
     { "wakatime/vim-wakatime" },
     { "mfussenegger/nvim-dap" },
@@ -186,6 +184,8 @@ linters.setup {
         args = { "--severity", "warning" },
     },
 }
+
+vim.list_extend(lvim.lsp.automatic_configuration.skipped_servers, { "rust_analyzer" })
 
 lvim.builtin.treesitter.rainbow.enable = true
 
